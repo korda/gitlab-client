@@ -14,8 +14,8 @@ def list_projects(config_name):
 
 def select_project(config_name):
     projects = [project["path_with_namespace"] for project in get_gitlab_access(config_name).get("projects")]
-    projects = projects * 6
     return select_option(projects)
+
 
 class GitlabAccess:
     def __init__(self, url, token):
