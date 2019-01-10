@@ -53,4 +53,4 @@ def get_gitlab_access(config_name):
 
 
 if __name__ == '__main__':
-    print(select_project("unity"))
+    print(select_project("private"))
