@@ -6,7 +6,7 @@ import curses
 
 
 def select_option(options_list):
-    wrapper(_select_option, options_list)
+    return wrapper(_select_option, options_list)
 
 
 def _select_option(stdscr, options_list):
@@ -85,6 +85,12 @@ def _select_option(stdscr, options_list):
                 selected_y = (selected_y-1) % last_col_row_height
             else:
                 selected_y = (selected_y-1) % row_height
+        if char == curses.KEY_HOME:
+            selected_x = 0
+            selected_y = 0
+        if char == curses.KEY_END:
+            selected_x = col_width-1
+            selected_y = row_height-1
 
         if selected_x == col_width-1 and selected_y >= last_col_row_height:
             selected_y = last_col_row_height-1

@@ -13,7 +13,23 @@ def list_projects(config_name):
 
 
 def select_project(config_name):
-    projects = [project["path_with_namespace"] for project in get_gitlab_access(config_name).get("projects")]
+    print("Getting list of all projects... This make take few moments.")
+    projects = []
+    per_page = 100
+    current_page = 1
+
+    while True:
+        current_page_projects = [project["path_with_namespace"] for project in get_gitlab_access(config_name)
+            .get(f"projects?per_page={per_page}&page={current_page}")]
+
+        current_page += 1
+        projects += current_page_projects
+
+        if len(current_page_projects) == 0 or len(current_page_projects) < per_page:
+            break
+
+    projects.sort()
+
     return select_option(projects)
 
 
@@ -53,4 +69,4 @@ def get_gitlab_access(config_name):
 
 
 if __name__ == '__main__':
-    print(select_project("private"))
+    print(select_project("unity"))
