@@ -96,7 +96,10 @@ def _select_option(stdscr, options_list):
             selected_y = last_col_row_height-1
 
         if char == ord('\n'):
-            return options_grid[selected_x][selected_y]
+            if filtered_options_list:
+                return options_grid[selected_x][selected_y]
+            else:
+                return None
 
         elif chr(char) in string.printable:
             search_string += chr(char)

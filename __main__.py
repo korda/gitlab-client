@@ -1,5 +1,6 @@
 import argparse
 from user_config import get_gitlab_api_client
+from user_config import get_project_dir_location
 from user_config import config_location
 from open_project import open_project
 
@@ -21,7 +22,8 @@ if __name__ == '__main__':
         open_project_parser.parse_args(main_args.args)
 
         gitlab_api_client = get_gitlab_api_client(gitlab_instance)
-        open_project(gitlab_api_client)
+        project_dir = get_project_dir_location()
+        open_project(gitlab_instance, gitlab_api_client, project_dir)
     else:
         print(f"Unsupported action {main_args.action}")
         quit(1)

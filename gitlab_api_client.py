@@ -4,10 +4,14 @@ import urllib.request
 
 
 class GitlabApi:
-    def __init__(self, url: str, token: str):
+    def __init__(self, url: str, token: str, checkout_url: str):
         self.__url = url
         self.__token = token
+        self.__checkout_url = checkout_url
         self.__api_root = '/api/v4'
+
+    def repo_url(self, path: str) -> str:
+        return self.__checkout_url + '/' + path.lstrip('/')
 
     def all_projects(self):
         print("Getting list of all projects... This make take few moments.")
