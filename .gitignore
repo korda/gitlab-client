@@ -2,3 +2,4 @@
 venv
 *.iml
 __pycache__
+*.pyz
