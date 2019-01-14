@@ -64,7 +64,7 @@ def __get_gitlab_instance_config(gitlab_instance):
 
 
 def __save_config(config):
-    config_location.write_text(json.dumps(config, indent=4))
+    config_location.write_text(json.dumps(config, indent=4) + "\n")
 
 
 def __load_config():
@@ -74,4 +74,4 @@ def __load_config():
 
 def __ensure_config_file_exists():
     if not config_location.is_file():
-        config_location.write_text('{}')
+        config_location.write_text('{}\n')
