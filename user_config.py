@@ -36,7 +36,7 @@ def __get_gitlab_instance_config(gitlab_instance):
     config = __load_config()
     gitlab_instances_key = 'gitlab_instances'
 
-    if config[gitlab_instances_key] is None:
+    if gitlab_instances_key not in config:
         config[gitlab_instances_key] = {}
 
     if gitlab_instance not in config[gitlab_instances_key]:
