@@ -1,6 +1,7 @@
 import json
 import urllib.parse
 import urllib.request
+import urllib.error
 
 
 class GitlabApi:
@@ -12,6 +13,12 @@ class GitlabApi:
 
     def repo_url(self, path: str) -> str:
         return self.__checkout_url + '/' + path.lstrip('/')
+
+    def find_namespace(self, search: str):
+        return self.__call('GET', "namespaces", search=search)
+
+    def create_project(self, path: str, namespace_id):
+        return self.__call('POST', "projects", path=path, namespace_id=namespace_id, visibility="private")
 
     def all_projects(self):
         print("Getting list of all projects... This make take few moments.")
