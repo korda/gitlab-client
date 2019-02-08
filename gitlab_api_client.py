@@ -29,11 +29,15 @@ class GitlabApi:
         while True:
             current_page_projects = self.__call('GET', "projects",
                                                 per_page=per_page,
-                                                page=current_page
+                                                page=current_page,
+                                                simple=True,
+                                                archived=False
                                                 )
 
             current_page += 1
             projects += current_page_projects
+
+            print(f"{len(projects)} projects retrieved so far...")
 
             if len(current_page_projects) == 0 or len(current_page_projects) < per_page:
                 break
