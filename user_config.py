@@ -21,6 +21,8 @@ def get_project_dir_location() -> str:
         provided_dir = input("Please provide directory for project checkout: ").lstrip().rstrip().rstrip("/")
         if not provided_dir.startswith("/"):
             provided_dir = Path.home() / provided_dir
+        else:
+            provided_dir = Path(provided_dir)
 
         print(f"Saving {provided_dir} as project checkout directory...")
         config[project_dir_key] = str(provided_dir.absolute())
