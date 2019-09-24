@@ -25,17 +25,7 @@ def __create_project(gitlab_api_client: GitlabApi, path: str):
     groups = path.split("/")
     path = groups.pop()
 
-    prev_group = None
-    group = None
-    for group_path in groups:
-
-        for found in gitlab_api_client.find_namespace(group_path):
-            if found['path'] == group_path and ((prev_group is None and found['parent_id'] is None)
-                                                or prev_group['id'] == found['parent_id']):
-                group = found
-                break
-
-        prev_group = group
+    group = gitlab_api_client.get_namespace("/".join(groups))
 
     repo = gitlab_api_client.create_project(path, group['id'])
 
