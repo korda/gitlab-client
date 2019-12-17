@@ -20,8 +20,8 @@ class GitlabApi:
     def create_project(self, path: str, namespace_id):
         return self.__call('POST', "projects", path=path, namespace_id=namespace_id, visibility="private")
 
-    def all_projects(self):
-        print("Getting list of all projects... This make take few moments.")
+    def projects(self, search: str):
+        print("Getting list of all projects containing %s... This make take few moments." % search)
         projects = []
         per_page = 100
         current_page = 1
@@ -31,7 +31,8 @@ class GitlabApi:
                                                 per_page=per_page,
                                                 page=current_page,
                                                 simple=True,
-                                                archived=False
+                                                archived=False,
+                                                search=search
                                                 )
 
             current_page += 1
