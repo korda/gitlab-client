@@ -21,7 +21,10 @@ class GitlabApi:
         return self.__call('POST', "projects", path=path, namespace_id=namespace_id, visibility="private")
 
     def projects(self, search: str):
-        print("Getting list of all projects containing %s... This make take few moments." % search)
+        if search:
+            print("Searching projects containing %s... This make take few moments." % search)
+        else:
+            print("Getting list of all projects... This make take few moments.")
         projects = []
         per_page = 100
         current_page = 1

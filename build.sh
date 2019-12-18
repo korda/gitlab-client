@@ -10,4 +10,4 @@ cp -r $(ls *.py| grep -vE "^venv$") $TARGET_DIR
 rm -f $APP_FILE
 
 /usr/bin/env python3 -m zipapp -o $APP_FILE -p '/usr/bin/env python3' $TARGET_DIR
-echo "install done: $APP_FILE"
+echo "build done, created: $APP_FILE"
