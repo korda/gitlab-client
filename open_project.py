@@ -17,20 +17,22 @@ def open_project_action(main_args, progname: str):
     open_project_parser.add_argument('--save-dir-to', dest='saveDirTo',
                                      help='dir path with checked out project will be stored in order to use in '
                                           'bash function to this location')
+    open_project_parser.add_argument('--search', dest='search', nargs='?', const='', type=str, default='', required=False,
+                                     help='search phrase to narrow projects list')
 
     args = open_project_parser.parse_args(main_args.args)
 
     gitlab_api_client = get_gitlab_api_client(gitlab_instance)
     project_dir = get_project_dir_location()
 
-    checkout_dir = __open_project(gitlab_instance, gitlab_api_client, project_dir)
+    checkout_dir = __open_project(gitlab_instance, gitlab_api_client, project_dir, args.search)
 
     if args.saveDirTo:
         Path(args.saveDirTo).write_text(checkout_dir + "\n")
 
 
-def __open_project(gitlab_instance: str, gitlab_api_client: GitlabApi, project_dir: str):
-    projects = [project["path_with_namespace"] for project in gitlab_api_client.all_projects()]
+def __open_project(gitlab_instance: str, gitlab_api_client: GitlabApi, project_dir: str, search: str):
+    projects = [project["path_with_namespace"] for project in gitlab_api_client.projects(search)]
 
     projects.sort()
 

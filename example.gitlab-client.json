@@ -1,0 +1,10 @@
+{
+  "gitlab_instances": {
+    "unity": {
+      "url": "https://git.unity.pl",
+      "token": "token",
+      "checkout_url": "ssh://git@git.unity.pl"
+    }
+  },
+  "project_dir": "/home/user/projects"
+}
