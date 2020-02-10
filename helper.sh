@@ -14,7 +14,9 @@ function project {
     $SCRIPTPATH/gitlab-client.pyz $1 open --save-dir-to $SAVE_FILE --search "${@:2}"
 
     if [ -s "$SAVE_FILE" ] ; then
-        cd $(cat $SAVE_FILE)
-        idea .
+		PROJECT_PATH=$(cat $SAVE_FILE)
+        cd $PROJECT_PATH
+		echo "opening $PROJECT_PATH"
+        idea $PROJECT_PATH
     fi
 }
